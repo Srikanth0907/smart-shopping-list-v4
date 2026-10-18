@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#28583b">
   <meta name="description" content="A simple, personal shopping list for everyday shopping.">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
   <title>Smart Shopping list - v4</title>
 
   <style>
@@ -638,6 +639,15 @@
         document.getElementById("homeStatus").textContent =
           "Preview only. Shopping-list creation will be added later.";
       });
+
+    // Register the service worker so the app can be installed and work offline.
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./sw.js").catch(function (error) {
+          console.error("Service worker registration failed:", error);
+        });
+      });
+    }
   </script>
 </body>
 </html>
