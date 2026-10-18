@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,112 +11,433 @@
 
   <style>
     :root {
-      --green:#28583b; --green-dark:#234d37; --ink:#213c2b;
-      --muted:#68756b; --soft:#e9f1e8; --border:#e4eae4;
-      --surface:#fff;
+      --green:#28583b;
+      --green-dark:#234d37;
+      --ink:#213c2b;
+      --muted:#68756b;
+      --soft:#e9f1e8;
+      --border:#e4eae4;
+      --surface:#ffffff;
     }
+
     * { box-sizing:border-box; }
     html { -webkit-text-size-adjust:100%; }
-    body { margin:0; font-family:Arial,Helvetica,sans-serif; color:var(--ink); background:#f7f9f6; }
-    button { font:inherit; cursor:pointer; -webkit-tap-highlight-color:transparent; }
-    button:focus-visible { outline:3px solid #8bbd96; outline-offset:3px; }
+
+    body {
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--ink);
+      background:#f7f9f6;
+    }
+
+    button {
+      font:inherit;
+      cursor:pointer;
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    button:focus-visible {
+      outline:3px solid #8bbd96;
+      outline-offset:3px;
+    }
+
     [hidden] { display:none!important; }
-    .app { min-height:100vh; min-height:100dvh; display:flex; flex-direction:column; max-width:1440px; margin:0 auto; background:var(--surface); }
-    header { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px clamp(18px,5vw,65px); border-bottom:1px solid var(--border); }
-    .brand { display:flex; align-items:center; gap:10px; font-size:15px; font-weight:700; letter-spacing:-.3px; }
-    .brand-icon { display:grid; place-items:center; width:38px; height:38px; flex-shrink:0; border-radius:11px; background:#e3efe4; font-size:21px; }
-    .header-note { color:var(--muted); font-size:12px; }
+
+    .app {
+      min-height:100vh;
+      min-height:100dvh;
+      display:flex;
+      flex-direction:column;
+      max-width:1440px;
+      margin:0 auto;
+      background:var(--surface);
+    }
+
+    header {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px clamp(18px,5vw,65px);
+      border-bottom:1px solid var(--border);
+    }
+
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:15px;
+      font-weight:700;
+      letter-spacing:-.3px;
+    }
+
+    .brand-icon {
+      display:grid;
+      place-items:center;
+      width:38px;
+      height:38px;
+      flex-shrink:0;
+      border-radius:11px;
+      background:#e3efe4;
+      font-size:21px;
+    }
+
+    .header-note {
+      color:var(--muted);
+      font-size:12px;
+    }
+
     main { flex:1; }
-    .landing { display:grid; grid-template-columns:1.1fr .9fr; align-items:center; gap:48px; padding:clamp(30px,6vw,80px) clamp(22px,7vw,100px); }
-    .eyebrow { color:#477853; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; }
-    h1 { margin:14px 0; color:var(--ink); font-size:clamp(40px,5vw,66px); line-height:1.06; letter-spacing:-2px; }
-    .description { max-width:440px; margin:0; color:var(--muted); font-size:15px; line-height:1.8; }
-    .google-button { display:flex; align-items:center; justify-content:center; gap:12px; width:min(100%,330px); min-height:52px; margin-top:25px; padding:12px; border:1px solid #d6ddd7; border-radius:10px; background:white; color:#27352c; font-weight:700; }
+
+    .landing {
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      align-items:center;
+      gap:48px;
+      padding:clamp(30px,6vw,80px) clamp(22px,7vw,100px);
+    }
+
+    .eyebrow {
+      color:#477853;
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:1.5px;
+      text-transform:uppercase;
+    }
+
+    h1 {
+      margin:14px 0;
+      color:var(--ink);
+      font-size:clamp(40px,5vw,66px);
+      line-height:1.06;
+      letter-spacing:-2px;
+    }
+
+    .description {
+      max-width:440px;
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.8;
+    }
+
+    .google-button {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      width:min(100%,330px);
+      min-height:52px;
+      margin-top:25px;
+      padding:12px;
+      border:1px solid #d6ddd7;
+      border-radius:10px;
+      background:white;
+      color:#27352c;
+      font-weight:700;
+    }
+
     .google-button:active { background:#f5f8f5; }
-    .google-button:disabled { cursor:wait; opacity:.65; }
-    .google-mark { color:#4285f4; font-size:21px; font-weight:700; }
-    .note { max-width:350px; color:#849087; font-size:11px; line-height:1.7; }
-    .status { min-height:16px; color:#477853; font-size:12px; line-height:1.5; overflow-wrap:anywhere; }
+
+    .google-button:disabled {
+      cursor:wait;
+      opacity:.65;
+    }
+
+    .google-mark {
+      color:#4285f4;
+      font-size:21px;
+      font-weight:700;
+    }
+
+    .note {
+      max-width:350px;
+      color:#849087;
+      font-size:11px;
+      line-height:1.7;
+    }
+
+    .status {
+      min-height:16px;
+      color:#477853;
+      font-size:12px;
+      line-height:1.5;
+      overflow-wrap:anywhere;
+    }
+
     .status.error { color:#b42318; }
-    .artwork { position:relative; display:grid; place-items:center; min-height:310px; overflow:hidden; border-radius:26px; background:var(--soft); }
-    .basket { display:grid; place-items:center; width:150px; height:135px; border:2px solid #6e9878; border-radius:15px 15px 28px 28px; background:white; font-size:65px; transform:rotate(-4deg); }
-    .float-card { position:absolute; padding:11px; border-radius:10px; background:white; box-shadow:0 5px 16px #29462a12; font-size:11px; }
+
+    .artwork {
+      position:relative;
+      display:grid;
+      place-items:center;
+      min-height:310px;
+      overflow:hidden;
+      border-radius:26px;
+      background:var(--soft);
+    }
+
+    .basket {
+      display:grid;
+      place-items:center;
+      width:150px;
+      height:135px;
+      border:2px solid #6e9878;
+      border-radius:15px 15px 28px 28px;
+      background:white;
+      font-size:65px;
+      transform:rotate(-4deg);
+    }
+
+    .float-card {
+      position:absolute;
+      padding:11px;
+      border-radius:10px;
+      background:white;
+      box-shadow:0 5px 16px #29462a12;
+      font-size:11px;
+    }
+
     .card-one { top:28px; left:12px; }
     .card-two { right:12px; bottom:28px; }
-    .home { width:100%; max-width:960px; margin:0 auto; padding:clamp(28px,5vw,60px) clamp(20px,5vw,50px); }
-    .welcome { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:38px; }
-    .welcome h1 { margin:10px 0; font-size:clamp(32px,4vw,44px); letter-spacing:-1.3px; }
-    .avatar { display:grid; place-items:center; width:48px; height:48px; flex:0 0 48px; border-radius:50%; background:var(--soft); color:var(--green); font-size:16px; font-weight:700; }
-    .section-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; }
-    .section-heading h2 { margin:0 0 6px; font-size:21px; }
-    .muted { margin:0; color:var(--muted); font-size:13px; line-height:1.7; }
-    .empty-state { margin-top:20px; padding:38px 18px; border:1px dashed #cbd7cb; border-radius:15px; background:#fafcf9; text-align:center; }
-    .empty-icon { margin-bottom:10px; font-size:34px; }
-    .empty-state h3 { margin:0 0 8px; font-size:17px; }
-    .empty-state p { max-width:350px; margin:10px auto 18px; color:var(--muted); font-size:13px; line-height:1.7; }
-    .primary-button { min-height:48px; padding:12px 18px; border:0; border-radius:9px; background:var(--green); color:white; font-weight:700; }
+
+    .home {
+      width:100%;
+      max-width:960px;
+      margin:0 auto;
+      padding:clamp(28px,5vw,60px) clamp(20px,5vw,50px);
+    }
+
+    .welcome {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:38px;
+    }
+
+    .welcome h1 {
+      margin:10px 0;
+      font-size:clamp(32px,4vw,44px);
+      letter-spacing:-1.3px;
+    }
+
+    .avatar {
+      display:grid;
+      place-items:center;
+      width:48px;
+      height:48px;
+      flex:0 0 48px;
+      border-radius:50%;
+      background:var(--soft);
+      color:var(--green);
+      font-size:16px;
+      font-weight:700;
+    }
+
+    .section-heading {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .section-heading h2 {
+      margin:0 0 6px;
+      font-size:21px;
+    }
+
+    .muted {
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    .empty-state {
+      margin-top:20px;
+      padding:38px 18px;
+      border:1px dashed #cbd7cb;
+      border-radius:15px;
+      background:#fafcf9;
+      text-align:center;
+    }
+
+    .empty-icon {
+      margin-bottom:10px;
+      font-size:34px;
+    }
+
+    .empty-state h3 {
+      margin:0 0 8px;
+      font-size:17px;
+    }
+
+    .empty-state p {
+      max-width:350px;
+      margin:10px auto 18px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    .primary-button {
+      min-height:48px;
+      padding:12px 18px;
+      border:0;
+      border-radius:9px;
+      background:var(--green);
+      color:white;
+      font-weight:700;
+    }
+
     .primary-button:active { background:var(--green-dark); }
-    .preview-notice { margin-top:18px; color:#879087; font-size:11px; text-align:center; }
-    .preview-controls { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; padding:12px; border-top:1px dashed var(--border); background:#fafcf9; }
-    .preview-controls button { min-height:42px; padding:9px 14px; border:1px solid var(--border); border-radius:9px; background:white; color:var(--green); font-size:12px; }
-    .signout-button { min-height:40px; padding:9px 14px; border:1px solid var(--border); border-radius:9px; background:white; color:var(--green); font-size:12px; font-weight:700; }
-    footer { display:flex; justify-content:space-between; gap:12px; padding:16px clamp(18px,5vw,65px); border-top:1px solid var(--border); color:#879087; font-size:11px; }
-    @media (min-width:1000px) { .artwork { min-height:370px; } }
+
+    .preview-notice {
+      margin-top:18px;
+      color:#879087;
+      font-size:11px;
+      text-align:center;
+    }
+
+    .signout-button {
+      min-height:40px;
+      padding:9px 14px;
+      border:1px solid var(--border);
+      border-radius:9px;
+      background:white;
+      color:var(--green);
+      font-size:12px;
+      font-weight:700;
+    }
+
+    footer {
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      padding:16px clamp(18px,5vw,65px);
+      border-top:1px solid var(--border);
+      color:#879087;
+      font-size:11px;
+    }
+
+    @media (min-width:1000px) {
+      .artwork { min-height:370px; }
+    }
+
     @media (max-width:700px) {
       header { padding:12px 16px; }
       .header-note { display:none; }
-      .landing { display:flex; flex-direction:column; align-items:stretch; gap:25px; padding:30px 20px; }
-      h1 { font-size:44px; letter-spacing:-1.5px; }
+
+      .landing {
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+        gap:25px;
+        padding:30px 20px;
+      }
+
+      h1 {
+        font-size:44px;
+        letter-spacing:-1.5px;
+      }
+
       .description { font-size:14px; }
-      .google-button { width:100%; min-height:54px; }
-      .artwork { min-height:180px; border-radius:20px; }
-      .basket { width:100px; height:88px; font-size:42px; }
-      .float-card { padding:9px; font-size:10px; }
+
+      .google-button {
+        width:100%;
+        min-height:54px;
+      }
+
+      .artwork {
+        min-height:180px;
+        border-radius:20px;
+      }
+
+      .basket {
+        width:100px;
+        height:88px;
+        font-size:42px;
+      }
+
+      .float-card {
+        padding:9px;
+        font-size:10px;
+      }
+
       .card-one { top:15px; left:8px; }
       .card-two { right:8px; bottom:15px; }
+
       .home { padding:30px 19px; }
       .welcome { margin-bottom:30px; }
+
       .welcome h1 { font-size:32px; }
-      .avatar { width:42px; height:42px; flex-basis:42px; }
+
+      .avatar {
+        width:42px;
+        height:42px;
+        flex-basis:42px;
+      }
+
       .empty-state { padding:30px 14px; }
       .primary-button { max-width:100%; }
-      footer { padding:13px 16px; font-size:9px; }
+
+      footer {
+        padding:13px 16px;
+        font-size:9px;
+      }
     }
+
     @media (max-width:360px) {
       footer { flex-direction:column; }
       h1 { font-size:39px; }
       .welcome h1 { font-size:28px; }
     }
+
     @media (prefers-reduced-motion:reduce) {
-      *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; transition-duration:.01ms!important; }
+      *,*::before,*::after {
+        scroll-behavior:auto!important;
+        animation-duration:.01ms!important;
+        transition-duration:.01ms!important;
+      }
     }
   </style>
 
+  <!-- Firebase Authentication SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 </head>
 
 <body>
   <div class="app">
+
     <header>
       <div class="brand">
         <span class="brand-icon" aria-hidden="true">🛍️</span>
         <span>Smart Shopping list - v4</span>
       </div>
-      <span class="header-note" id="headerNote">Simple shopping. Less forgetting.</span>
+      <span class="header-note" id="headerNote">
+        Simple shopping. Less forgetting.
+      </span>
     </header>
 
     <main>
       <section class="landing" id="landing">
         <div>
           <div class="eyebrow">A simpler way to shop</div>
+
           <h1>Your list.<br>Your way.</h1>
+
           <p class="description">
             Keep your shopping organised, remember what you need,
             and make everyday shopping a little easier.
           </p>
 
-          <button class="google-button" id="googleButton" type="button">
+          <button
+            class="google-button"
+            id="googleButton"
+            type="button"
+          >
             <span class="google-mark" aria-hidden="true">G</span>
             <span id="googleButtonText">Continue with Google</span>
           </button>
@@ -125,6 +445,7 @@
           <p class="note" id="loginNote">
             Sign in with your Google account to continue.
           </p>
+
           <p class="status" id="landingStatus" role="status" aria-live="polite"></p>
         </div>
 
@@ -139,10 +460,16 @@
         <div class="welcome">
           <div>
             <div class="eyebrow">Your shopping space</div>
+
             <h1 id="welcomeTitle">Welcome back!</h1>
-            <p class="description">Your everyday shopping, all in one place.</p>
+
+            <p class="description">
+              Your everyday shopping, all in one place.
+            </p>
+
             <p class="muted" id="userEmail"></p>
           </div>
+
           <div class="avatar" id="avatar" aria-label="User profile">S</div>
         </div>
 
@@ -151,19 +478,30 @@
             <h2>My Lists</h2>
             <p class="muted">Your shopping lists will appear here.</p>
           </div>
-          <button class="signout-button" id="signOutButton" type="button">Sign out</button>
+
+          <button class="signout-button" id="signOutButton" type="button">
+            Sign out
+          </button>
         </div>
 
         <div class="empty-state">
           <div class="empty-icon" aria-hidden="true">🛍️</div>
+
           <h3>Your lists start here</h3>
+
           <p>
             Create a list for groceries, household essentials
             or your next shopping trip.
           </p>
-          <button class="primary-button" id="createButton" type="button">
+
+          <button
+            class="primary-button"
+            id="createButton"
+            type="button"
+          >
             ＋ Create your first list
           </button>
+
           <p class="status" id="homeStatus" role="status" aria-live="polite"></p>
         </div>
 
@@ -177,14 +515,15 @@
       <span>Made for everyday shopping</span>
       <span>Simple · Personal · Practical</span>
     </footer>
+
   </div>
 
   <script>
     "use strict";
 
-    // Firebase web app configuration from your Firebase project.
+    // Exact configuration copied from Firebase Console.
     const firebaseConfig = {
-      apiKey: "AIzaSyA8W0GSuszZosP8Cx6X9x-KaiIoktAu2xw",
+      apiKey: "AIzaSyA8WOGSuszZosP8Cx6S9x-KaiIoktAu2xw",
       authDomain: "smart-shopping-list-v4.firebaseapp.com",
       projectId: "smart-shopping-list-v4",
       storageBucket: "smart-shopping-list-v4.firebasestorage.app",
@@ -218,24 +557,30 @@
       document.title = "My Lists - Smart Shopping list - v4";
 
       const displayName = user.displayName || "there";
+
       document.getElementById("welcomeTitle").textContent =
         "Welcome, " + displayName + "!";
-      document.getElementById("userEmail").textContent = user.email || "";
+
+      document.getElementById("userEmail").textContent =
+        user.email || "";
+
       document.getElementById("avatar").textContent =
         (displayName.trim().charAt(0) || "S").toUpperCase();
 
       homeStatus.textContent = "";
-      window.scrollTo({ top: 0, behavior: "auto" });
-    }
+      homeStatus.classList.remove("error");
 
-    function showError(message) {
-      landingStatus.textContent = message;
-      landingStatus.classList.add("error");
+      window.scrollTo({ top: 0, behavior: "auto" });
     }
 
     function clearLoginStatus() {
       landingStatus.textContent = "";
       landingStatus.classList.remove("error");
+    }
+
+    function showError(message) {
+      landingStatus.textContent = message;
+      landingStatus.classList.add("error");
     }
 
     function friendlyAuthError(error) {
@@ -245,14 +590,22 @@
         case "auth/popup-closed-by-user":
         case "auth/cancelled-popup-request":
           return "Sign-in was cancelled. Please try again.";
+
         case "auth/unauthorized-domain":
           return "This website is not authorised for sign-in. Check Firebase Authorized domains.";
-        case "auth/network-request-failed":
-          return "Network error. Check your internet connection and try again.";
+
         case "auth/operation-not-allowed":
           return "Google sign-in is not enabled in Firebase Authentication.";
+
+        case "auth/network-request-failed":
+          return "Network error. Check your internet connection and try again.";
+
         case "auth/too-many-requests":
-          return "Too many attempts. Please wait a little before trying again.";
+          return "Too many attempts. Please wait before trying again.";
+
+        case "auth/api-key-not-valid-please-pass-a-valid-api-key":
+          return "Firebase rejected the API key. Verify that the key belongs to this Firebase project and is enabled.";
+
         default:
           return "Google sign-in could not be completed. Please try again. (" +
             (error.code || "unknown error") + ")";
@@ -269,10 +622,13 @@
 
       try {
         const provider = new firebase.auth.GoogleAuthProvider();
-        provider.setCustomParameters({ prompt: "select_account" });
+        provider.setCustomParameters({
+          prompt: "select_account"
+        });
 
-        // Use redirect on mobile/PWA and popup on desktop.
-        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        const isMobile = /Android|iPhone|iPad|iPod/i.test(
+          navigator.userAgent
+        );
 
         if (isMobile) {
           await auth.signInWithRedirect(provider);
@@ -294,6 +650,7 @@
         showLanding();
         clearLoginStatus();
         homeStatus.textContent = "";
+        homeStatus.classList.remove("error");
       } catch (error) {
         console.error("Sign-out error:", error);
         homeStatus.textContent = "Sign-out failed. Please try again.";
@@ -301,8 +658,7 @@
       }
     }
 
-    document.getElementById("googleButton")
-      .addEventListener("click", signInWithGoogle);
+    googleButton.addEventListener("click", signInWithGoogle);
 
     document.getElementById("signOutButton")
       .addEventListener("click", signOut);
@@ -320,9 +676,12 @@
       }
 
       auth = firebase.auth();
-      auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
-      // Complete any mobile redirect sign-in and restore an existing session.
+      auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .catch(function (error) {
+          console.error("Auth persistence setup error:", error);
+        });
+
       auth.getRedirectResult().catch(function (error) {
         signingIn = false;
         googleButton.disabled = false;
@@ -341,14 +700,19 @@
         } else {
           showLanding();
         }
+      }, function (error) {
+        showError(friendlyAuthError(error));
       });
+
     } catch (error) {
       console.error("Firebase initialisation error:", error);
       googleButton.disabled = true;
-      showError("Sign-in could not initialise. Please check the Firebase configuration.");
+      showError(
+        "Sign-in could not initialise. Please check the Firebase configuration."
+      );
     }
 
-    // Keep the existing PWA service worker registration.
+    // Preserve PWA service-worker registration.
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", function () {
         navigator.serviceWorker.register("./sw.js").catch(function (error) {
