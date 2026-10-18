@@ -1,0 +1,643 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#28583b">
+  <meta name="description" content="A simple, personal shopping list for everyday shopping.">
+  <title>Smart Shopping list - v4</title>
+
+  <style>
+    :root {
+      --green: #28583b;
+      --green-dark: #234d37;
+      --ink: #213c2b;
+      --muted: #68756b;
+      --soft: #e9f1e8;
+      --border: #e4eae4;
+      --surface: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: #f7f9f6;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus-visible {
+      outline: 3px solid #8bbd96;
+      outline-offset: 3px;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    .app {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      max-width: 1440px;
+      margin: 0 auto;
+      background: var(--surface);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px clamp(18px, 5vw, 65px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .brand-icon {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+      border-radius: 11px;
+      background: #e3efe4;
+      font-size: 21px;
+    }
+
+    .header-note {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    /* LANDING PAGE */
+
+    .landing {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 48px;
+      padding: clamp(30px, 6vw, 80px)
+               clamp(22px, 7vw, 100px);
+    }
+
+    .eyebrow {
+      color: #477853;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 14px 0;
+      color: var(--ink);
+      font-size: clamp(40px, 5vw, 66px);
+      line-height: 1.06;
+      letter-spacing: -2px;
+    }
+
+    .description {
+      max-width: 440px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .google-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: min(100%, 330px);
+      min-height: 52px;
+      margin-top: 25px;
+      padding: 12px;
+      border: 1px solid #d6ddd7;
+      border-radius: 10px;
+      background: white;
+      color: #27352c;
+      font-weight: 700;
+    }
+
+    .google-button:active {
+      background: #f5f8f5;
+    }
+
+    .google-mark {
+      color: #4285f4;
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .note {
+      max-width: 350px;
+      color: #849087;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .status {
+      min-height: 16px;
+      color: #477853;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .artwork {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 310px;
+      overflow: hidden;
+      border-radius: 26px;
+      background: var(--soft);
+    }
+
+    .basket {
+      display: grid;
+      place-items: center;
+      width: 150px;
+      height: 135px;
+      border: 2px solid #6e9878;
+      border-radius: 15px 15px 28px 28px;
+      background: white;
+      font-size: 65px;
+      transform: rotate(-4deg);
+    }
+
+    .float-card {
+      position: absolute;
+      padding: 11px;
+      border-radius: 10px;
+      background: white;
+      box-shadow: 0 5px 16px #29462a12;
+      font-size: 11px;
+    }
+
+    .card-one {
+      top: 28px;
+      left: 12px;
+    }
+
+    .card-two {
+      right: 12px;
+      bottom: 28px;
+    }
+
+    /* HOME PAGE */
+
+    .home {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: clamp(28px, 5vw, 60px)
+               clamp(20px, 5vw, 50px);
+    }
+
+    .welcome {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 38px;
+    }
+
+    .welcome h1 {
+      margin: 10px 0;
+      font-size: clamp(32px, 4vw, 44px);
+      letter-spacing: -1.3px;
+    }
+
+    .avatar {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      flex: 0 0 48px;
+      border-radius: 50%;
+      background: var(--soft);
+      color: var(--green);
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .section-heading h2 {
+      margin: 0 0 6px;
+      font-size: 21px;
+    }
+
+    .muted {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .empty-state {
+      margin-top: 20px;
+      padding: 38px 18px;
+      border: 1px dashed #cbd7cb;
+      border-radius: 15px;
+      background: #fafcf9;
+      text-align: center;
+    }
+
+    .empty-icon {
+      margin-bottom: 10px;
+      font-size: 34px;
+    }
+
+    .empty-state h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+    }
+
+    .empty-state p {
+      max-width: 350px;
+      margin: 10px auto 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .primary-button {
+      min-height: 48px;
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--green);
+      color: white;
+      font-weight: 700;
+    }
+
+    .primary-button:active {
+      background: var(--green-dark);
+    }
+
+    .preview-notice {
+      margin-top: 18px;
+      color: #879087;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    /* TEMPORARY DESIGN-REVIEW CONTROLS */
+
+    .preview-controls {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 12px;
+      border-top: 1px dashed var(--border);
+      background: #fafcf9;
+    }
+
+    .preview-controls button {
+      min-height: 42px;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: white;
+      color: var(--green);
+      font-size: 12px;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px clamp(18px, 5vw, 65px);
+      border-top: 1px solid var(--border);
+      color: #879087;
+      font-size: 11px;
+    }
+
+    /* TABLET AND MOBILE */
+
+    @media (min-width: 1000px) {
+      .artwork {
+        min-height: 370px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      header {
+        padding: 12px 16px;
+      }
+
+      .header-note {
+        display: none;
+      }
+
+      .landing {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 25px;
+        padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 44px;
+        letter-spacing: -1.5px;
+      }
+
+      .description {
+        font-size: 14px;
+      }
+
+      .google-button {
+        width: 100%;
+        min-height: 54px;
+      }
+
+      .artwork {
+        min-height: 180px;
+        border-radius: 20px;
+      }
+
+      .basket {
+        width: 100px;
+        height: 88px;
+        font-size: 42px;
+      }
+
+      .float-card {
+        padding: 9px;
+        font-size: 10px;
+      }
+
+      .card-one {
+        top: 15px;
+        left: 8px;
+      }
+
+      .card-two {
+        right: 8px;
+        bottom: 15px;
+      }
+
+      .home {
+        padding: 30px 19px;
+      }
+
+      .welcome {
+        margin-bottom: 30px;
+      }
+
+      .welcome h1 {
+        font-size: 32px;
+      }
+
+      .avatar {
+        width: 42px;
+        height: 42px;
+        flex-basis: 42px;
+      }
+
+      .empty-state {
+        padding: 30px 14px;
+      }
+
+      .primary-button {
+        max-width: 100%;
+      }
+
+      footer {
+        padding: 13px 16px;
+        font-size: 9px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      footer {
+        flex-direction: column;
+      }
+
+      h1 {
+        font-size: 39px;
+      }
+
+      .welcome h1 {
+        font-size: 28px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <header>
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">🛍️</span>
+        <span>Smart Shopping list - v4</span>
+      </div>
+      <span class="header-note" id="headerNote">
+        Simple shopping. Less forgetting.
+      </span>
+    </header>
+
+    <main>
+      <!-- LANDING PAGE -->
+      <section class="landing" id="landing">
+        <div>
+          <div class="eyebrow">A simpler way to shop</div>
+
+          <h1>Your list.<br>Your way.</h1>
+
+          <p class="description">
+            Keep your shopping organised, remember what you need,
+            and make everyday shopping a little easier.
+          </p>
+
+          <button
+            class="google-button"
+            id="googleButton"
+            type="button"
+          >
+            <span class="google-mark" aria-hidden="true">G</span>
+            Continue with Google
+          </button>
+
+          <p class="note">
+            Google sign-in will be connected in a later phase.
+            This is a design preview only.
+          </p>
+
+          <p class="status" id="landingStatus" role="status"></p>
+        </div>
+
+        <div class="artwork" aria-hidden="true">
+          <div class="float-card card-one">✓ Fresh produce</div>
+          <div class="basket">🛒</div>
+          <div class="float-card card-two">✓ Everyday essentials</div>
+        </div>
+      </section>
+
+      <!-- HOME PAGE DESIGN PREVIEW -->
+      <section class="home" id="home" hidden>
+        <div class="welcome">
+          <div>
+            <div class="eyebrow">Your shopping space</div>
+
+            <h1 id="welcomeTitle">Welcome back!</h1>
+
+            <p class="description">
+              Your everyday shopping, all in one place.
+            </p>
+          </div>
+
+          <div class="avatar" id="avatar" aria-label="Sample profile">
+            S
+          </div>
+        </div>
+
+        <div class="section-heading">
+          <div>
+            <h2>My Lists</h2>
+            <p class="muted">
+              Your shopping lists will appear here.
+            </p>
+          </div>
+        </div>
+
+        <div class="empty-state">
+          <div class="empty-icon" aria-hidden="true">🛍️</div>
+
+          <h3>Your lists start here</h3>
+
+          <p>
+            Create a list for groceries, household essentials
+            or your next shopping trip.
+          </p>
+
+          <button
+            class="primary-button"
+            id="createButton"
+            type="button"
+          >
+            ＋ Create your first list
+          </button>
+
+          <p class="status" id="homeStatus" role="status"></p>
+        </div>
+
+        <p class="preview-notice">
+          Design preview only. No account or shopping data is connected.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <span>Made for everyday shopping</span>
+      <span>Simple · Personal · Practical</span>
+    </footer>
+
+    <!-- REMOVE THESE CONTROLS BEFORE PRODUCTION -->
+    <div class="preview-controls" aria-label="Design preview controls">
+      <button type="button" id="showLanding">
+        Preview landing page
+      </button>
+
+      <button type="button" id="showHome">
+        Preview home page
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    "use strict";
+
+    const landing = document.getElementById("landing");
+    const home = document.getElementById("home");
+    const headerNote = document.getElementById("headerNote");
+
+    function showLanding() {
+      landing.hidden = false;
+      home.hidden = true;
+
+      headerNote.textContent = "Simple shopping. Less forgetting.";
+      document.title = "Smart Shopping list - v4";
+
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
+
+    function showHome() {
+      landing.hidden = true;
+      home.hidden = false;
+
+      headerNote.textContent = "Your personal shopping space";
+      document.title = "My Lists - Smart Shopping list - v4";
+
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
+
+    document.getElementById("showLanding")
+      .addEventListener("click", showLanding);
+
+    document.getElementById("showHome")
+      .addEventListener("click", showHome);
+
+    document.getElementById("googleButton")
+      .addEventListener("click", function () {
+        document.getElementById("landingStatus").textContent =
+          "Preview only. Google sign-in has not been connected yet.";
+      });
+
+    document.getElementById("createButton")
+      .addEventListener("click", function () {
+        document.getElementById("homeStatus").textContent =
+          "Preview only. Shopping-list creation will be added later.";
+      });
+  </script>
+</body>
+</html>
