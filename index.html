@@ -521,7 +521,7 @@
   <script>
     "use strict";
 
-    // Exact configuration copied from Firebase Console.
+    // Firebase project configuration.
     const firebaseConfig = {
       apiKey: "AIzaSyA8WOGSuszZosP8Cx6S9x-KaiIoktAu2xw",
       authDomain: "smart-shopping-list-v4.firebaseapp.com",
@@ -540,6 +540,7 @@
     const homeStatus = document.getElementById("homeStatus");
 
     let auth;
+    let authReady;
     let signingIn = false;
 
     function showLanding() {
@@ -621,7 +622,11 @@
       clearLoginStatus();
 
       try {
+        // Wait until Firebase authentication is fully initialised.
+        await authReady;
+
         const provider = new firebase.auth.GoogleAuthProvider();
+
         provider.setCustomParameters({
           prompt: "select_account"
         });
@@ -670,49 +675,60 @@
           "Shopping-list creation will be connected in the next step.";
       });
 
-    try {
-      if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-      }
+    async function initialiseFirebaseAuth() {
+      try {
+        if (!firebase.apps.length) {
+          firebase.initializeApp(firebaseConfig);
+        }
 
-      auth = firebase.auth();
+        auth = firebase.auth();
 
-      auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-        .catch(function (error) {
-          console.error("Auth persistence setup error:", error);
+        // Finish persistence setup before recovering a mobile redirect.
+        await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+
+        // Process the Google redirect result before attaching the listener.
+        const redirectResult = await auth.getRedirectResult();
+
+        if (redirectResult && redirectResult.user) {
+          showHome(redirectResult.user);
+        }
+
+        // This listener also restores a previously signed-in user on reload.
+        auth.onAuthStateChanged(function (user) {
+          signingIn = false;
+          googleButton.disabled = false;
+          googleButtonText.textContent = "Continue with Google";
+
+          if (user) {
+            clearLoginStatus();
+            showHome(user);
+          } else {
+            showLanding();
+          }
+        }, function (error) {
+          signingIn = false;
+          googleButton.disabled = false;
+          googleButtonText.textContent = "Continue with Google";
+          showError(friendlyAuthError(error));
         });
 
-      auth.getRedirectResult().catch(function (error) {
+      } catch (error) {
+        console.error(
+          "Firebase initialisation or redirect recovery error:",
+          error
+        );
+
         signingIn = false;
         googleButton.disabled = false;
         googleButtonText.textContent = "Continue with Google";
         showError(friendlyAuthError(error));
-      });
-
-      auth.onAuthStateChanged(function (user) {
-        signingIn = false;
-        googleButton.disabled = false;
-        googleButtonText.textContent = "Continue with Google";
-
-        if (user) {
-          clearLoginStatus();
-          showHome(user);
-        } else {
-          showLanding();
-        }
-      }, function (error) {
-        showError(friendlyAuthError(error));
-      });
-
-    } catch (error) {
-      console.error("Firebase initialisation error:", error);
-      googleButton.disabled = true;
-      showError(
-        "Sign-in could not initialise. Please check the Firebase configuration."
-      );
+      }
     }
 
-    // Preserve PWA service-worker registration.
+    // Prevent sign-in from racing Firebase initialisation.
+    authReady = initialiseFirebaseAuth();
+
+    // Preserve the existing PWA service-worker registration.
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", function () {
         navigator.serviceWorker.register("./sw.js").catch(function (error) {
