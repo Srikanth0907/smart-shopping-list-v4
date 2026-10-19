@@ -11,406 +11,404 @@
 
   <style>
     :root {
-      --green:#28583b;
-      --green-dark:#234d37;
-      --ink:#213c2b;
-      --muted:#68756b;
-      --soft:#e9f1e8;
-      --border:#e4eae4;
-      --surface:#ffffff;
+      --green: #28583b;
+      --green-dark: #234d37;
+      --ink: #213c2b;
+      --muted: #68756b;
+      --soft: #e9f1e8;
+      --border: #e4eae4;
+      --surface: #ffffff;
     }
 
-    * { box-sizing:border-box; }
-    html { -webkit-text-size-adjust:100%; }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
 
     body {
-      margin:0;
-      font-family:Arial,Helvetica,sans-serif;
-      color:var(--ink);
-      background:#f7f9f6;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: #f7f9f6;
     }
 
     button {
-      font:inherit;
-      cursor:pointer;
-      -webkit-tap-highlight-color:transparent;
+      font: inherit;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
     }
 
     button:focus-visible {
-      outline:3px solid #8bbd96;
-      outline-offset:3px;
+      outline: 3px solid #8bbd96;
+      outline-offset: 3px;
     }
 
-    [hidden] { display:none!important; }
+    [hidden] { display: none !important; }
 
     .app {
-      min-height:100vh;
-      min-height:100dvh;
-      display:flex;
-      flex-direction:column;
-      max-width:1440px;
-      margin:0 auto;
-      background:var(--surface);
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      max-width: 1440px;
+      margin: 0 auto;
+      background: var(--surface);
     }
 
     header {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:14px clamp(18px,5vw,65px);
-      border-bottom:1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px clamp(18px, 5vw, 65px);
+      border-bottom: 1px solid var(--border);
     }
 
     .brand {
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-size:15px;
-      font-weight:700;
-      letter-spacing:-.3px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -.3px;
     }
 
     .brand-icon {
-      display:grid;
-      place-items:center;
-      width:38px;
-      height:38px;
-      flex-shrink:0;
-      border-radius:11px;
-      background:#e3efe4;
-      font-size:21px;
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+      border-radius: 11px;
+      background: #e3efe4;
+      font-size: 21px;
     }
 
     .header-note {
-      color:var(--muted);
-      font-size:12px;
+      color: var(--muted);
+      font-size: 12px;
     }
 
-    main { flex:1; }
+    main { flex: 1; }
 
     .landing {
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      align-items:center;
-      gap:48px;
-      padding:clamp(30px,6vw,80px) clamp(22px,7vw,100px);
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: center;
+      gap: 48px;
+      padding: clamp(30px, 6vw, 80px) clamp(22px, 7vw, 100px);
     }
 
     .eyebrow {
-      color:#477853;
-      font-size:11px;
-      font-weight:700;
-      letter-spacing:1.5px;
-      text-transform:uppercase;
+      color: #477853;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
     }
 
     h1 {
-      margin:14px 0;
-      color:var(--ink);
-      font-size:clamp(40px,5vw,66px);
-      line-height:1.06;
-      letter-spacing:-2px;
+      margin: 14px 0;
+      color: var(--ink);
+      font-size: clamp(40px, 5vw, 66px);
+      line-height: 1.06;
+      letter-spacing: -2px;
     }
 
     .description {
-      max-width:440px;
-      margin:0;
-      color:var(--muted);
-      font-size:15px;
-      line-height:1.8;
+      max-width: 440px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
     }
 
     .google-button {
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:12px;
-      width:min(100%,330px);
-      min-height:52px;
-      margin-top:25px;
-      padding:12px;
-      border:1px solid #d6ddd7;
-      border-radius:10px;
-      background:white;
-      color:#27352c;
-      font-weight:700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: min(100%, 330px);
+      min-height: 52px;
+      margin-top: 25px;
+      padding: 12px;
+      border: 1px solid #d6ddd7;
+      border-radius: 10px;
+      background: white;
+      color: #27352c;
+      font-weight: 700;
     }
 
-    .google-button:active { background:#f5f8f5; }
+    .google-button:active { background: #f5f8f5; }
 
     .google-button:disabled {
-      cursor:wait;
-      opacity:.65;
+      cursor: wait;
+      opacity: .65;
     }
 
     .google-mark {
-      color:#4285f4;
-      font-size:21px;
-      font-weight:700;
+      color: #4285f4;
+      font-size: 21px;
+      font-weight: 700;
     }
 
     .note {
-      max-width:350px;
-      color:#849087;
-      font-size:11px;
-      line-height:1.7;
+      max-width: 350px;
+      color: #849087;
+      font-size: 11px;
+      line-height: 1.7;
     }
 
     .status {
-      min-height:16px;
-      color:#477853;
-      font-size:12px;
-      line-height:1.5;
-      overflow-wrap:anywhere;
+      min-height: 16px;
+      color: #477853;
+      font-size: 12px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
     }
 
-    .status.error { color:#b42318; }
+    .status.error { color: #b42318; }
 
     .artwork {
-      position:relative;
-      display:grid;
-      place-items:center;
-      min-height:310px;
-      overflow:hidden;
-      border-radius:26px;
-      background:var(--soft);
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 310px;
+      overflow: hidden;
+      border-radius: 26px;
+      background: var(--soft);
     }
 
     .basket {
-      display:grid;
-      place-items:center;
-      width:150px;
-      height:135px;
-      border:2px solid #6e9878;
-      border-radius:15px 15px 28px 28px;
-      background:white;
-      font-size:65px;
-      transform:rotate(-4deg);
+      display: grid;
+      place-items: center;
+      width: 150px;
+      height: 135px;
+      border: 2px solid #6e9878;
+      border-radius: 15px 15px 28px 28px;
+      background: white;
+      font-size: 65px;
+      transform: rotate(-4deg);
     }
 
     .float-card {
-      position:absolute;
-      padding:11px;
-      border-radius:10px;
-      background:white;
-      box-shadow:0 5px 16px #29462a12;
-      font-size:11px;
+      position: absolute;
+      padding: 11px;
+      border-radius: 10px;
+      background: white;
+      box-shadow: 0 5px 16px #29462a12;
+      font-size: 11px;
     }
 
-    .card-one { top:28px; left:12px; }
-    .card-two { right:12px; bottom:28px; }
+    .card-one { top: 28px; left: 12px; }
+    .card-two { right: 12px; bottom: 28px; }
 
     .home {
-      width:100%;
-      max-width:960px;
-      margin:0 auto;
-      padding:clamp(28px,5vw,60px) clamp(20px,5vw,50px);
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: clamp(28px, 5vw, 60px) clamp(20px, 5vw, 50px);
     }
 
     .welcome {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      margin-bottom:38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 38px;
     }
 
     .welcome h1 {
-      margin:10px 0;
-      font-size:clamp(32px,4vw,44px);
-      letter-spacing:-1.3px;
+      margin: 10px 0;
+      font-size: clamp(32px, 4vw, 44px);
+      letter-spacing: -1.3px;
     }
 
     .avatar {
-      display:grid;
-      place-items:center;
-      width:48px;
-      height:48px;
-      flex:0 0 48px;
-      border-radius:50%;
-      background:var(--soft);
-      color:var(--green);
-      font-size:16px;
-      font-weight:700;
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      flex: 0 0 48px;
+      border-radius: 50%;
+      background: var(--soft);
+      color: var(--green);
+      font-size: 16px;
+      font-weight: 700;
     }
 
     .section-heading {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
     }
 
     .section-heading h2 {
-      margin:0 0 6px;
-      font-size:21px;
+      margin: 0 0 6px;
+      font-size: 21px;
     }
 
     .muted {
-      margin:0;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.7;
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
     }
 
     .empty-state {
-      margin-top:20px;
-      padding:38px 18px;
-      border:1px dashed #cbd7cb;
-      border-radius:15px;
-      background:#fafcf9;
-      text-align:center;
+      margin-top: 20px;
+      padding: 38px 18px;
+      border: 1px dashed #cbd7cb;
+      border-radius: 15px;
+      background: #fafcf9;
+      text-align: center;
     }
 
     .empty-icon {
-      margin-bottom:10px;
-      font-size:34px;
+      margin-bottom: 10px;
+      font-size: 34px;
     }
 
     .empty-state h3 {
-      margin:0 0 8px;
-      font-size:17px;
+      margin: 0 0 8px;
+      font-size: 17px;
     }
 
     .empty-state p {
-      max-width:350px;
-      margin:10px auto 18px;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.7;
+      max-width: 350px;
+      margin: 10px auto 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
     }
 
     .primary-button {
-      min-height:48px;
-      padding:12px 18px;
-      border:0;
-      border-radius:9px;
-      background:var(--green);
-      color:white;
-      font-weight:700;
+      min-height: 48px;
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--green);
+      color: white;
+      font-weight: 700;
     }
 
-    .primary-button:active { background:var(--green-dark); }
+    .primary-button:active { background: var(--green-dark); }
 
     .preview-notice {
-      margin-top:18px;
-      color:#879087;
-      font-size:11px;
-      text-align:center;
+      margin-top: 18px;
+      color: #879087;
+      font-size: 11px;
+      text-align: center;
     }
 
     .signout-button {
-      min-height:40px;
-      padding:9px 14px;
-      border:1px solid var(--border);
-      border-radius:9px;
-      background:white;
-      color:var(--green);
-      font-size:12px;
-      font-weight:700;
+      min-height: 40px;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: white;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 700;
     }
 
     footer {
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      padding:16px clamp(18px,5vw,65px);
-      border-top:1px solid var(--border);
-      color:#879087;
-      font-size:11px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px clamp(18px, 5vw, 65px);
+      border-top: 1px solid var(--border);
+      color: #879087;
+      font-size: 11px;
     }
 
-    @media (min-width:1000px) {
-      .artwork { min-height:370px; }
+    @media (min-width: 1000px) {
+      .artwork { min-height: 370px; }
     }
 
-    @media (max-width:700px) {
-      header { padding:12px 16px; }
-      .header-note { display:none; }
+    @media (max-width: 700px) {
+      header { padding: 12px 16px; }
+      .header-note { display: none; }
 
       .landing {
-        display:flex;
-        flex-direction:column;
-        align-items:stretch;
-        gap:25px;
-        padding:30px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 25px;
+        padding: 30px 20px;
       }
 
       h1 {
-        font-size:44px;
-        letter-spacing:-1.5px;
+        font-size: 44px;
+        letter-spacing: -1.5px;
       }
 
-      .description { font-size:14px; }
+      .description { font-size: 14px; }
 
       .google-button {
-        width:100%;
-        min-height:54px;
+        width: 100%;
+        min-height: 54px;
       }
 
       .artwork {
-        min-height:180px;
-        border-radius:20px;
+        min-height: 180px;
+        border-radius: 20px;
       }
 
       .basket {
-        width:100px;
-        height:88px;
-        font-size:42px;
+        width: 100px;
+        height: 88px;
+        font-size: 42px;
       }
 
       .float-card {
-        padding:9px;
-        font-size:10px;
+        padding: 9px;
+        font-size: 10px;
       }
 
-      .card-one { top:15px; left:8px; }
-      .card-two { right:8px; bottom:15px; }
+      .card-one { top: 15px; left: 8px; }
+      .card-two { right: 8px; bottom: 15px; }
 
-      .home { padding:30px 19px; }
-      .welcome { margin-bottom:30px; }
+      .home { padding: 30px 19px; }
+      .welcome { margin-bottom: 30px; }
 
-      .welcome h1 { font-size:32px; }
+      .welcome h1 { font-size: 32px; }
 
       .avatar {
-        width:42px;
-        height:42px;
-        flex-basis:42px;
+        width: 42px;
+        height: 42px;
+        flex-basis: 42px;
       }
 
-      .empty-state { padding:30px 14px; }
-      .primary-button { max-width:100%; }
+      .empty-state { padding: 30px 14px; }
+      .primary-button { max-width: 100%; }
 
       footer {
-        padding:13px 16px;
-        font-size:9px;
+        padding: 13px 16px;
+        font-size: 9px;
       }
     }
 
-    @media (max-width:360px) {
-      footer { flex-direction:column; }
-      h1 { font-size:39px; }
-      .welcome h1 { font-size:28px; }
+    @media (max-width: 360px) {
+      footer { flex-direction: column; }
+      h1 { font-size: 39px; }
+      .welcome h1 { font-size: 28px; }
     }
 
-    @media (prefers-reduced-motion:reduce) {
-      *,*::before,*::after {
-        scroll-behavior:auto!important;
-        animation-duration:.01ms!important;
-        transition-duration:.01ms!important;
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
       }
     }
   </style>
 
-  <!-- Firebase Authentication SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 </head>
 
 <body>
   <div class="app">
-
     <header>
       <div class="brand">
         <span class="brand-icon" aria-hidden="true">🛍️</span>
@@ -425,7 +423,6 @@
       <section class="landing" id="landing">
         <div>
           <div class="eyebrow">A simpler way to shop</div>
-
           <h1>Your list.<br>Your way.</h1>
 
           <p class="description">
@@ -433,11 +430,7 @@
             and make everyday shopping a little easier.
           </p>
 
-          <button
-            class="google-button"
-            id="googleButton"
-            type="button"
-          >
+          <button class="google-button" id="googleButton" type="button">
             <span class="google-mark" aria-hidden="true">G</span>
             <span id="googleButtonText">Continue with Google</span>
           </button>
@@ -460,13 +453,10 @@
         <div class="welcome">
           <div>
             <div class="eyebrow">Your shopping space</div>
-
             <h1 id="welcomeTitle">Welcome back!</h1>
-
             <p class="description">
               Your everyday shopping, all in one place.
             </p>
-
             <p class="muted" id="userEmail"></p>
           </div>
 
@@ -486,7 +476,6 @@
 
         <div class="empty-state">
           <div class="empty-icon" aria-hidden="true">🛍️</div>
-
           <h3>Your lists start here</h3>
 
           <p>
@@ -494,11 +483,7 @@
             or your next shopping trip.
           </p>
 
-          <button
-            class="primary-button"
-            id="createButton"
-            type="button"
-          >
+          <button class="primary-button" id="createButton" type="button">
             ＋ Create your first list
           </button>
 
@@ -515,13 +500,11 @@
       <span>Made for everyday shopping</span>
       <span>Simple · Personal · Practical</span>
     </footer>
-
   </div>
 
   <script>
     "use strict";
 
-    // Firebase project configuration.
     const firebaseConfig = {
       apiKey: "AIzaSyA8WOGSuszZosP8Cx6S9x-KaiIoktAu2xw",
       authDomain: "smart-shopping-list-v4.firebaseapp.com",
@@ -589,8 +572,13 @@
 
       switch (error.code) {
         case "auth/popup-closed-by-user":
+          return "The Google sign-in window was closed before sign-in completed. Please try again.";
+
+        case "auth/popup-blocked":
+          return "Chrome blocked the Google sign-in popup. Allow popups for this site, then try again.";
+
         case "auth/cancelled-popup-request":
-          return "Sign-in was cancelled. Please try again.";
+          return "A sign-in request was cancelled. Please try again.";
 
         case "auth/unauthorized-domain":
           return "This website is not authorised for sign-in. Check Firebase Authorized domains.";
@@ -622,7 +610,6 @@
       clearLoginStatus();
 
       try {
-        // Wait until Firebase authentication is fully initialised.
         await authReady;
 
         const provider = new firebase.auth.GoogleAuthProvider();
@@ -631,18 +618,19 @@
           prompt: "select_account"
         });
 
-        const isMobile = /Android|iPhone|iPad|iPod/i.test(
-          navigator.userAgent
-        );
+        /*
+         * Diagnostic change:
+         * Use popup sign-in on every device, including Android.
+         * Do not use signInWithRedirect in this test.
+         */
+        const result = await auth.signInWithPopup(provider);
 
-        if (isMobile) {
-          await auth.signInWithRedirect(provider);
-          return;
+        if (result && result.user) {
+          showHome(result.user);
         }
-
-        await auth.signInWithPopup(provider);
       } catch (error) {
         showError(friendlyAuthError(error));
+      } finally {
         signingIn = false;
         googleButton.disabled = false;
         googleButtonText.textContent = "Continue with Google";
@@ -683,22 +671,9 @@
 
         auth = firebase.auth();
 
-        // Finish persistence setup before recovering a mobile redirect.
         await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
-        // Process the Google redirect result before attaching the listener.
-        const redirectResult = await auth.getRedirectResult();
-
-        if (redirectResult && redirectResult.user) {
-          showHome(redirectResult.user);
-        }
-
-        // This listener also restores a previously signed-in user on reload.
         auth.onAuthStateChanged(function (user) {
-          signingIn = false;
-          googleButton.disabled = false;
-          googleButtonText.textContent = "Continue with Google";
-
           if (user) {
             clearLoginStatus();
             showHome(user);
@@ -706,29 +681,17 @@
             showLanding();
           }
         }, function (error) {
-          signingIn = false;
-          googleButton.disabled = false;
-          googleButtonText.textContent = "Continue with Google";
           showError(friendlyAuthError(error));
         });
 
       } catch (error) {
-        console.error(
-          "Firebase initialisation or redirect recovery error:",
-          error
-        );
-
-        signingIn = false;
-        googleButton.disabled = false;
-        googleButtonText.textContent = "Continue with Google";
+        console.error("Firebase initialisation error:", error);
         showError(friendlyAuthError(error));
       }
     }
 
-    // Prevent sign-in from racing Firebase initialisation.
     authReady = initialiseFirebaseAuth();
 
-    // Preserve the existing PWA service-worker registration.
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", function () {
         navigator.serviceWorker.register("./sw.js").catch(function (error) {
