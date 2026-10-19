@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#28583b">
-  <meta name="description" content="A simple, personal shopping list for everyday shopping.">
+  <meta name="description" content="A smart, simple and convenient way to organise your shopping lists and share them with family and friends.">
   <link rel="manifest" href="./manifest.json">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
-  <title>Smart Shopping list - v4</title>
+  <title>Smart Shopping List</title>
 
   <style>
     :root {
@@ -20,8 +20,13 @@
       --surface: #ffffff;
     }
 
-    * { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
 
     body {
       margin: 0;
@@ -41,7 +46,9 @@
       outline-offset: 3px;
     }
 
-    [hidden] { display: none !important; }
+    [hidden] {
+      display: none !important;
+    }
 
     .app {
       min-height: 100vh;
@@ -87,7 +94,9 @@
       font-size: 12px;
     }
 
-    main { flex: 1; }
+    main {
+      flex: 1;
+    }
 
     .landing {
       display: grid;
@@ -137,7 +146,9 @@
       font-weight: 700;
     }
 
-    .google-button:active { background: #f5f8f5; }
+    .google-button:active {
+      background: #f5f8f5;
+    }
 
     .google-button:disabled {
       cursor: wait;
@@ -165,7 +176,9 @@
       overflow-wrap: anywhere;
     }
 
-    .status.error { color: #b42318; }
+    .status.error {
+      color: #b42318;
+    }
 
     .artwork {
       position: relative;
@@ -198,8 +211,15 @@
       font-size: 11px;
     }
 
-    .card-one { top: 28px; left: 12px; }
-    .card-two { right: 12px; bottom: 28px; }
+    .card-one {
+      top: 28px;
+      left: 12px;
+    }
+
+    .card-two {
+      right: 12px;
+      bottom: 28px;
+    }
 
     .home {
       width: 100%;
@@ -291,13 +311,8 @@
       font-weight: 700;
     }
 
-    .primary-button:active { background: var(--green-dark); }
-
-    .preview-notice {
-      margin-top: 18px;
-      color: #879087;
-      font-size: 11px;
-      text-align: center;
+    .primary-button:active {
+      background: var(--green-dark);
     }
 
     .signout-button {
@@ -311,6 +326,23 @@
       font-weight: 700;
     }
 
+    .sharing-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .sharing-icon {
+      color: #477853;
+      font-size: 17px;
+    }
+
     footer {
       display: flex;
       justify-content: space-between;
@@ -322,12 +354,19 @@
     }
 
     @media (min-width: 1000px) {
-      .artwork { min-height: 370px; }
+      .artwork {
+        min-height: 370px;
+      }
     }
 
     @media (max-width: 700px) {
-      header { padding: 12px 16px; }
-      .header-note { display: none; }
+      header {
+        padding: 12px 16px;
+      }
+
+      .header-note {
+        display: none;
+      }
 
       .landing {
         display: flex;
@@ -342,7 +381,9 @@
         letter-spacing: -1.5px;
       }
 
-      .description { font-size: 14px; }
+      .description {
+        font-size: 14px;
+      }
 
       .google-button {
         width: 100%;
@@ -365,13 +406,27 @@
         font-size: 10px;
       }
 
-      .card-one { top: 15px; left: 8px; }
-      .card-two { right: 8px; bottom: 15px; }
+      .card-one {
+        top: 15px;
+        left: 8px;
+      }
 
-      .home { padding: 30px 19px; }
-      .welcome { margin-bottom: 30px; }
+      .card-two {
+        right: 8px;
+        bottom: 15px;
+      }
 
-      .welcome h1 { font-size: 32px; }
+      .home {
+        padding: 30px 19px;
+      }
+
+      .welcome {
+        margin-bottom: 30px;
+      }
+
+      .welcome h1 {
+        font-size: 32px;
+      }
 
       .avatar {
         width: 42px;
@@ -379,8 +434,13 @@
         flex-basis: 42px;
       }
 
-      .empty-state { padding: 30px 14px; }
-      .primary-button { max-width: 100%; }
+      .empty-state {
+        padding: 30px 14px;
+      }
+
+      .primary-button {
+        max-width: 100%;
+      }
 
       footer {
         padding: 13px 16px;
@@ -389,9 +449,17 @@
     }
 
     @media (max-width: 360px) {
-      footer { flex-direction: column; }
-      h1 { font-size: 39px; }
-      .welcome h1 { font-size: 28px; }
+      footer {
+        flex-direction: column;
+      }
+
+      h1 {
+        font-size: 39px;
+      }
+
+      .welcome h1 {
+        font-size: 28px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -403,43 +471,58 @@
     }
   </style>
 
+  <!-- Firebase Authentication SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 </head>
 
 <body>
   <div class="app">
+
     <header>
       <div class="brand">
         <span class="brand-icon" aria-hidden="true">🛍️</span>
-        <span>Smart Shopping list - v4</span>
+        <span>Smart Shopping List</span>
       </div>
+
       <span class="header-note" id="headerNote">
-        Simple shopping. Less forgetting.
+        Your shopping list, within easy reach.
       </span>
     </header>
 
     <main>
+      <!-- LANDING PAGE -->
       <section class="landing" id="landing">
         <div>
-          <div class="eyebrow">A simpler way to shop</div>
-          <h1>Your list.<br>Your way.</h1>
+          <div class="eyebrow">Smart • Simple • Convenient</div>
+
+          <h1>Your shopping list,<br>wherever you go.</h1>
 
           <p class="description">
-            Keep your shopping organised, remember what you need,
-            and make everyday shopping a little easier.
+            Keep your shopping organised with a simple and convenient
+            list that's ready whenever you need it — at home, at the
+            store, or on the go.
           </p>
 
-          <button class="google-button" id="googleButton" type="button">
+          <button
+            class="google-button"
+            id="googleButton"
+            type="button"
+          >
             <span class="google-mark" aria-hidden="true">G</span>
             <span id="googleButtonText">Continue with Google</span>
           </button>
 
           <p class="note" id="loginNote">
-            Sign in with your Google account to continue.
+            Sign in to keep your shopping lists within easy reach.
           </p>
 
-          <p class="status" id="landingStatus" role="status" aria-live="polite"></p>
+          <p
+            class="status"
+            id="landingStatus"
+            role="status"
+            aria-live="polite"
+          ></p>
         </div>
 
         <div class="artwork" aria-hidden="true">
@@ -449,14 +532,14 @@
         </div>
       </section>
 
+      <!-- HOME PAGE -->
       <section class="home" id="home" hidden>
         <div class="welcome">
           <div>
             <div class="eyebrow">Your shopping space</div>
-            <h1 id="welcomeTitle">Welcome back!</h1>
-            <p class="description">
-              Your everyday shopping, all in one place.
-            </p>
+
+            <h1 id="welcomeTitle">Welcome!</h1>
+
             <p class="muted" id="userEmail"></p>
           </div>
 
@@ -465,46 +548,65 @@
 
         <div class="section-heading">
           <div>
-            <h2>My Lists</h2>
-            <p class="muted">Your shopping lists will appear here.</p>
+            <h2>My Shopping Lists</h2>
+            <p class="muted">
+              All the things you need, organised in one place.
+            </p>
           </div>
 
-          <button class="signout-button" id="signOutButton" type="button">
+          <button
+            class="signout-button"
+            id="signOutButton"
+            type="button"
+          >
             Sign out
           </button>
         </div>
 
         <div class="empty-state">
           <div class="empty-icon" aria-hidden="true">🛍️</div>
-          <h3>Your lists start here</h3>
+
+          <h3>Ready for your next shopping trip?</h3>
 
           <p>
-            Create a list for groceries, household essentials
-            or your next shopping trip.
+            Start a shopping list, add the items you need, and share
+            it with family or friends.
           </p>
 
-          <button class="primary-button" id="createButton" type="button">
-            ＋ Create your first list
+          <button
+            class="primary-button"
+            id="createButton"
+            type="button"
+          >
+            + Create New List
           </button>
 
-          <p class="status" id="homeStatus" role="status" aria-live="polite"></p>
+          <p
+            class="status"
+            id="homeStatus"
+            role="status"
+            aria-live="polite"
+          ></p>
         </div>
 
-        <p class="preview-notice">
-          Google sign-in is connected. Shopping-list data will be connected in a later step.
-        </p>
+        <div class="sharing-note">
+          <span class="sharing-icon" aria-hidden="true">👥</span>
+          <span>Shopping is easier when shared.</span>
+        </div>
       </section>
     </main>
 
     <footer>
-      <span>Made for everyday shopping</span>
-      <span>Simple · Personal · Practical</span>
+      <span>Smart • Simple • Convenient</span>
+      <span>Your shopping list, within easy reach.</span>
     </footer>
+
   </div>
 
   <script>
     "use strict";
 
+    // Existing Firebase project configuration.
     const firebaseConfig = {
       apiKey: "AIzaSyA8WOGSuszZosP8Cx6S9x-KaiIoktAu2xw",
       authDomain: "smart-shopping-list-v4.firebaseapp.com",
@@ -529,16 +631,23 @@
     function showLanding() {
       landing.hidden = false;
       home.hidden = true;
-      headerNote.textContent = "Simple shopping. Less forgetting.";
-      document.title = "Smart Shopping list - v4";
+
+      headerNote.textContent =
+        "Your shopping list, within easy reach.";
+
+      document.title = "Smart Shopping List";
+
       window.scrollTo({ top: 0, behavior: "auto" });
     }
 
     function showHome(user) {
       landing.hidden = true;
       home.hidden = false;
-      headerNote.textContent = "Your personal shopping space";
-      document.title = "My Lists - Smart Shopping list - v4";
+
+      headerNote.textContent =
+        "Your shopping list, within easy reach.";
+
+      document.title = "My Shopping Lists - Smart Shopping List";
 
       const displayName = user.displayName || "there";
 
@@ -575,7 +684,7 @@
           return "The Google sign-in window was closed before sign-in completed. Please try again.";
 
         case "auth/popup-blocked":
-          return "Chrome blocked the Google sign-in popup. Allow popups for this site, then try again.";
+          return "Your browser blocked the Google sign-in popup. Please allow popups for this site and try again.";
 
         case "auth/cancelled-popup-request":
           return "A sign-in request was cancelled. Please try again.";
@@ -619,13 +728,13 @@
         });
 
         /*
-         * Diagnostic change:
-         * Use popup sign-in on every device, including Android.
-         * Do not use signInWithRedirect in this test.
+         * Keep the confirmed working popup sign-in flow
+         * on desktop, Android browsers, and the installed PWA.
          */
         const result = await auth.signInWithPopup(provider);
 
         if (result && result.user) {
+          clearLoginStatus();
           showHome(result.user);
         }
       } catch (error) {
@@ -640,13 +749,18 @@
     async function signOut() {
       try {
         await auth.signOut();
+
         showLanding();
         clearLoginStatus();
+
         homeStatus.textContent = "";
         homeStatus.classList.remove("error");
       } catch (error) {
         console.error("Sign-out error:", error);
-        homeStatus.textContent = "Sign-out failed. Please try again.";
+
+        homeStatus.textContent =
+          "Sign-out failed. Please try again.";
+
         homeStatus.classList.add("error");
       }
     }
@@ -659,8 +773,9 @@
     document.getElementById("createButton")
       .addEventListener("click", function () {
         homeStatus.classList.remove("error");
+
         homeStatus.textContent =
-          "Shopping-list creation will be connected in the next step.";
+          "Shopping-list creation will be available in the next implementation phase.";
       });
 
     async function initialiseFirebaseAuth() {
@@ -671,31 +786,51 @@
 
         auth = firebase.auth();
 
-        await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+        await auth.setPersistence(
+          firebase.auth.Auth.Persistence.LOCAL
+        );
 
-        auth.onAuthStateChanged(function (user) {
-          if (user) {
-            clearLoginStatus();
-            showHome(user);
-          } else {
-            showLanding();
+        auth.onAuthStateChanged(
+          function (user) {
+            signingIn = false;
+
+            googleButton.disabled = false;
+            googleButtonText.textContent = "Continue with Google";
+
+            if (user) {
+              clearLoginStatus();
+              showHome(user);
+            } else {
+              showLanding();
+            }
+          },
+          function (error) {
+            showError(friendlyAuthError(error));
           }
-        }, function (error) {
-          showError(friendlyAuthError(error));
-        });
+        );
 
       } catch (error) {
         console.error("Firebase initialisation error:", error);
+
+        signingIn = false;
+        googleButton.disabled = false;
+        googleButtonText.textContent = "Continue with Google";
+
         showError(friendlyAuthError(error));
       }
     }
 
+    // Ensure Firebase is initialised before a sign-in request.
     authReady = initialiseFirebaseAuth();
 
+    // Preserve PWA service-worker registration.
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", function () {
         navigator.serviceWorker.register("./sw.js").catch(function (error) {
-          console.error("Service worker registration failed:", error);
+          console.error(
+            "Service worker registration failed:",
+            error
+          );
         });
       });
     }
